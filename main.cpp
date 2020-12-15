@@ -160,9 +160,9 @@ void remove(Node** head) {
       *head = (*head)->getLchild();
     }
     else {
+      cout << "head with 2 children" << endl;
       node = getReplacementNode((*head)->getLchild());
       temp1 = getParent(*head, node->getValue());
-      temp1->setRchild(NULL);
       if (node->getLchild() == NULL) {
 	*head = node;
 	if (temp->getLchild() != node) {
@@ -174,14 +174,16 @@ void remove(Node** head) {
 	(*head)->setRchild(temp->getRchild());
       }
       else {
+        cout << "Replacement node has a left child" << endl;
 	temp1 = node->getLchild();
-	getParent(*head, node->getValue())->setRchild(temp1);
 	*head = node;
 	if (temp->getLchild() != node) {
 	  (*head)->setLchild(temp->getLchild());
+	  getParent(*head, node->getValue())->setRchild(temp1);
 	}
 	else {
-	  (*head)->setLchild(NULL);
+	  cout << "a" << endl;
+	  (*head)->setLchild(temp1);
 	}
 	(*head)->setRchild(temp->getRchild());
       }
